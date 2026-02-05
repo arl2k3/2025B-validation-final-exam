@@ -1,6 +1,14 @@
 package com.bezkoder.spring.jpa.h2.model;
 
-import jakarta.persistence.*;
+import java.util.Objects;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "tutorials")
@@ -20,7 +28,6 @@ public class Tutorial {
   private boolean published;
 
   public Tutorial() {
-
   }
 
   public Tutorial(String title, String description, boolean published) {
@@ -60,6 +67,23 @@ public class Tutorial {
   @Override
   public String toString() {
     return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Tutorial tutorial = (Tutorial) o;
+    return id == tutorial.id;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
   }
 
 }
